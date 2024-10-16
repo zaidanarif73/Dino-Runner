@@ -11,7 +11,10 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		if not get_parent().game_running:
-			animated_sprite.play("idle")
+			if get_parent().health != 0:
+				animated_sprite.play("idle")
+			else:
+				animated_sprite.play("died")
 		else:
 			
 			if Input.is_action_pressed("ui_accept"):

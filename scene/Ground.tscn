@@ -7,6 +7,7 @@ extents = Vector2( 511.5, 22 )
 
 [node name="Ground" type="StaticBody2D"]
 scale = Vector2( 2, 1 )
+z_index = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.533, 0.556 )

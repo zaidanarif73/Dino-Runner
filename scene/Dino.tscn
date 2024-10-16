@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://character/Idle (5).png" type="Texture" id=1]
 [ext_resource path="res://character/Idle (8).png" type="Texture" id=2]
@@ -31,9 +31,22 @@
 [ext_resource path="res://character/Run (6).png" type="Texture" id=29]
 [ext_resource path="res://character/Jump (5).png" type="Texture" id=30]
 [ext_resource path="res://character/Jump (8).png" type="Texture" id=31]
+[ext_resource path="res://character/Dead (1).png" type="Texture" id=32]
+[ext_resource path="res://character/Dead (8).png" type="Texture" id=33]
+[ext_resource path="res://character/Dead (4).png" type="Texture" id=34]
+[ext_resource path="res://character/Dead (3).png" type="Texture" id=35]
+[ext_resource path="res://character/Dead (6).png" type="Texture" id=36]
+[ext_resource path="res://character/Dead (2).png" type="Texture" id=37]
+[ext_resource path="res://character/Dead (7).png" type="Texture" id=38]
+[ext_resource path="res://character/Dead (5).png" type="Texture" id=39]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 32 ), ExtResource( 37 ), ExtResource( 35 ), ExtResource( 34 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 38 ), ExtResource( 33 ) ],
+"loop": false,
+"name": "died",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 10 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "idle",
@@ -51,7 +64,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 83.75, 106.75 )
+extents = Vector2( 58.25, 88 )
 
 [node name="Dino" type="KinematicBody2D"]
 script = ExtResource( 19 )
@@ -65,5 +78,5 @@ animation = "run"
 playing = true
 
 [node name="RunCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 143.25, 464 )
+position = Vector2( 117.75, 472 )
 shape = SubResource( 2 )
