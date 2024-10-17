@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dirty-mind_main backsound.mp3-3e570f1061e1eaca065a7fa45d187ec7.mp3str"
+
+[deps]
+
+source_file="res://sfx/dirty-mind_main backsound.mp3"
+dest_files=[ "res://.import/dirty-mind_main backsound.mp3-3e570f1061e1eaca065a7fa45d187ec7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

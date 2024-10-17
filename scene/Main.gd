@@ -36,6 +36,7 @@ func new_game():
 	$Dino.position = Vector2(0, 0)
 	$Camera2D.position = cam_start_post
 	$Ground.position = Vector2(0, 0)
+	$MainSound.play()
 	
 	#reset HUD
 	$HUD.get_node("StartLabel").show()
@@ -77,7 +78,7 @@ func generate_obs():
 		var obs
 		obs = obs_type.instance()
 		
-		#difficulty of the game obstacle spawn
+		#difficulty of the game obstacle spawn 
 		if score/10 < 1000:
 			difficulty = 1000
 		elif score/10 <3000:
@@ -101,10 +102,13 @@ func remove_obs(obs):
 
 func hit_obs(body):
 	if body.name == "Dino":
+		$Dino.get_node("HitSound").play()
 		health -= 1
 		$HUD.get_node("HealthLabel").text =  str(health)
 		if health == 0:
 			game_running = false
+			$Dino.get_node("DiedSound").play()
+			$MainSound.stop()
 	
 
 func show_score():

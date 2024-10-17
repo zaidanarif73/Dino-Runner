@@ -15,13 +15,16 @@ func _physics_process(delta):
 				animated_sprite.play("idle")
 			else:
 				animated_sprite.play("died")
+				
 		else:
 			
 			if Input.is_action_pressed("ui_accept"):
 				motion.y = jump_speed
 				animated_sprite.play("jump")
+				$JumpSound.play()
 			else:
 				animated_sprite.play("run")
+				$JumpSound.stop()
 	else:
 		animated_sprite.play("jump")
 	
