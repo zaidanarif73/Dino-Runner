@@ -20,30 +20,50 @@ var health : int = 5
 var screen_size : Vector2
 var ground_height : int
 var game_running : bool
+var game_reset : bool
 var last_obs
 
 func _ready():
 	screen_size = get_viewport().size
 	ground_height = $Ground.get_node("Sprite").texture.get_height()
+	$GameOver.get_node("Button").connect("pressed" , self, "new_game")
 	new_game()
 
 func new_game():
 	#reset variable
 	score = 0
 	show_score()
+	
+	
 	#reset node
 	$Dino.position = dino_start_post
 	$Dino.position = Vector2(0, 0)
 	$Camera2D.position = cam_start_post
 	$Ground.position = Vector2(0, 0)
 	$MainSound.play()
-	
+
 	#reset HUD
 	$HUD.get_node("StartLabel").show()
+	
+	#hide gameover 
+	$GameOver.hide()
+	
+	#reset pause
+	get_tree().paused = false
+	
+	#reset health bar
+	health = 5
+	$HUD.get_node("HealthLabel").text =  str(health)
+	
+	#reset obstacle
+	for obs in obstacles:
+		obs.queue_free()
+		obstacles.clear()
 
 #process while game started
 func _process(delta):
 	if game_running:
+		$HUD.get_node("StartLabel").hide()
 		speed = start_speed
 		
 		#generate obstacles
@@ -66,11 +86,17 @@ func _process(delta):
 			if obs.position.x < ($Camera2D.position.x - screen_size.x):
 				remove_obs(obs)
 	else:
-		
+		#deteksi space entered
 		if Input.is_action_pressed("ui_accept"):
-			game_running = true
-			$HUD.get_node("StartLabel").hide()
-
+			if health != 0:
+				game_running = true
+			else:
+				yield(get_tree().create_timer(1.0), "timeout")
+				new_game()
+				
+				
+				
+				
 func generate_obs():
 	#ground obs
 	if obstacles.empty() or last_obs.position.x < score + rand_range(300, 500):
@@ -109,7 +135,8 @@ func hit_obs(body):
 			game_running = false
 			$Dino.get_node("DiedSound").play()
 			$MainSound.stop()
-	
+			$GameOver.show()
+	 
 
 func show_score():
 	$HUD.get_node("ScoreLabel").text = "SCORE : "+ str(score/10)
